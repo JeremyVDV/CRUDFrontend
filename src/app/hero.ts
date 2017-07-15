@@ -1,3 +1,4 @@
-/**
- * Created by Titan on 11-7-2017.
- */
+export class Hero {
+  id: number;
+  name: string;
+}
