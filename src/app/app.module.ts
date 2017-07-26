@@ -3,37 +3,29 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-/** Het laden en configureren van de in-memory web api, kan later weg
-*/
-
-import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './in-memory-data.service';
+import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { DashboardComponent } from './dashboard.component';
-import { HeroDetailComponent } from './hero-detail.component';
-import { HeroesComponent } from './heroes.component';
-import { HeroSearchComponent } from './hero-search.component';
-import { HeroService } from './hero.service';
+import { UserDetailComponent } from './user-detail.component';
+import { UsersComponent } from './users.component';
+import { UserSearchComponent } from './user-search.component';
+import { UserService } from './user.service';
 
-import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule,
     HttpModule,
-    InMemoryWebApiModule.forRoot(InMemoryDataService),
+    AppRoutingModule
   ],
   declarations: [
     AppComponent,
-    DashboardComponent,
-    HeroDetailComponent,
-    HeroesComponent,
-    HeroSearchComponent
+    UserDetailComponent,
+    UsersComponent,
+    UserSearchComponent
   ],
-  providers: [ HeroService ],
+  providers: [ UserService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
