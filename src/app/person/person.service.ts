@@ -4,51 +4,51 @@ import { Headers, Http, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 
-import { User } from './user';
+import { Person } from './person';
 
 @Injectable()
-export class UserService {
-  private usersUrl = 'http://localhost:8082/person';  // URL to web api
+export class PersonService {
+  private personsUrl = 'http://localhost:8082/person';  // URL to web api
   private headers = new Headers({'Content-Type': 'application/json'}); // Headers voor het updaten
 
   constructor(private http: Http) { }
 
-  getUsers(): Promise<User[]> {
-    const url = `${this.usersUrl}/list`;
+  getPersons(): Promise<Person[]> {
+    const url = `${this.personsUrl}/list`;
     return this.http.get(url)
       .toPromise()
-      .then(response => response.json() as User[])
+      .then(response => response.json() as Person[])
       .catch(this.handleError);
   }
 
-  getUser(id: number): Promise<User> {
-    const url = `${this.usersUrl}/${id}`;
+  getPerson(id: number): Promise<Person> {
+    const url = `${this.personsUrl}/${id}`;
     return this.http.get(url)
       .toPromise()
-      .then(response => response.json() as User)
+      .then(response => response.json() as Person)
       .catch(this.handleError);
   }
 
-  update(user: User): Promise<User> {
-    const url = `${this.usersUrl}/update/${user.id}`;
+  update(person: Person): Promise<Person> {
+    const url = `${this.personsUrl}/update/${person.id}`;
     return this.http
-      .put(url, JSON.stringify(user), {headers: this.headers})
+      .put(url, JSON.stringify(person), {headers: this.headers})
       .toPromise()
-      .then(() => user)
+      .then(() => person)
       .catch(this.handleError);
   }
 
-  create(name: string): Promise<User> {
-    const url = `${this.usersUrl}/create`;
+  create(name: string): Promise<Person> {
+    const url = `${this.personsUrl}/create`;
     return this.http
       .post(url, JSON.stringify({name: name}), {headers: this.headers})
       .toPromise()
-      .then(res => res.json() as User)
+      .then(res => res.json() as Person)
       .catch(this.handleError);
   }
 
   delete(id: number): Promise<void> {
-    const url = `${this.usersUrl}/delete/${id}`;
+    const url = `${this.personsUrl}/delete/${id}`;
     return this.http.get(url, {headers: this.headers})
       .toPromise()
       .then(() => null)
@@ -56,7 +56,7 @@ export class UserService {
   }
 
   private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // Aanpassen naar een legitieme error afhandeling
+    console.error('An error occurred', error);
     return Promise.reject(error.message || error);
   }
 }

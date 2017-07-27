@@ -1,0 +1,41 @@
+<h2>Add todo</h2>
+<div>
+  <form #signupForm="ngForm" (ngSubmit)="add(signupForm); shortdesc.value=''; longdesc.value=''">
+    Short description<br>
+    <input type="text" name="shortdesc" ngModel>
+    <br><br>
+    Long description<br>
+    <textarea type="text" name="longdesc" ngModel></textarea>
+    <br><br>
+    <button type="submit" value="Submit">Add</button>
+  </form>
+</div>
+<hr>
+<h2>Todos</h2>
+<div *ngIf="todos?.length < 1">
+  No todos found
+</div>
+<div *ngIf="todos?.length > 0">
+  <table class="table" role="grid" style="width: 50%; text-align: left;">
+    <thead>
+    <tr role="row">
+      <th>ID</th>
+      <th>Short description</th>
+      <th>Long description</th>
+      <th>Done</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let todo of todos" [class.selected]="todo === selectedTodo" (click)="onSelect(todo)">
+      <td style="width: 2%;">{{todo.id}}</td>
+      <td style="width: 10%;">{{todo.shortdesc}}</td>
+      <td style="width: 10%;">{{todo.longdesc}}</td>
+      <td style="width: 10%;">{{todo.done}}</td>
+      <td style="width: 5%;"><img src="https://maxcdn.icons8.com/Share/icon/Editing//delete1600.png" width="32" height="32" alt="" (click)="delete(todo); $event.stopPropagation()"></td>
+      <td style="width: 5%;"><img src="https://image.freepik.com/free-icon/edit-interface-symbol-of-a-pencil-on-a-square-outline-paper_318-61160.jpg" width="25" height="25" alt="" (click)="gotoDetail(todo)"></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+

@@ -1,0 +1,19 @@
+<div *ngIf="todo">
+  <h2>Details of todo: {{todo.shortdesc}}</h2>
+  <div><label>ID: </label>{{todo.id}}</div>
+  <div>
+    <label>Short description </label><br>
+    <input [(ngModel)]="todo.shortdesc"/>
+  </div>
+  <br>
+  <div>
+    <label>Long description </label><br>
+    <textarea [(ngModel)]="todo.longdesc" ></textarea>
+  </div>
+  <div>
+    <label>Short description </label><br>
+    <input [(ngModel)]="todo.done"/>
+  </div>
+  <button (click)="goBack()">Back</button>
+  <button (click)="save()">Save</button>
+</div>

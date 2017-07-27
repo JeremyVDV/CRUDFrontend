@@ -1,0 +1,92 @@
+<h2>Add person</h2>
+<div>
+  <form #signupForm="ngForm" (ngSubmit)="add(signupForm); shortdesc.value=''; longdesc.value=''">
+    Name<br>
+    <input type="text" name="name" ngModel>
+    <br><br>
+    <button type="submit" value="Submit">Add</button>
+  </form>
+</div>
+<hr>
+
+<h2>Persons</h2>
+<ul class="persons">
+  <div *ngIf="!persons">
+    No persons found
+  </div>
+  <li *ngFor="let person of persons"
+      [class.selected]="person === selectedPerson"
+      (click)="onSelectPerson(person, person.todos)" style="width: 350px">
+    <span class="badge">{{person.id}}</span> {{person.name}}
+    <button class="delete"
+            (click)="delete(person); $event.stopPropagation()">Remove</button>
+    <button class="edit"
+            (click)="gotoDetail(person); $event.stopPropagation()">Edit</button>
+  </li>
+</ul>
+
+<div *ngIf="selectedPerson">
+  <h2>Todos of: {{selectedPerson.name}}</h2>
+  <div *ngIf="selectedPerson.todos?.length < 1">
+    No todos found
+  </div>
+  <div *ngIf="selectedPerson.todos?.length > 0">
+    <table class="table" role="grid" style="width: 50%; text-align: left;">
+      <thead>
+      <tr role="row">
+        <th>ID</th>
+        <th>Short description</th>
+        <th>Long description</th>
+        <th>Done</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let todo of selectedPerson.todos" [class.selected]="todo === selectedTodo" (click)="onSelectTodo(todo)">
+        <td style="width: 2%;">{{todo.id}}</td>
+        <td style="width: 10%;">{{todo.shortdesc}}</td>
+        <td style="width: 10%;">{{todo.longdesc}}</td>
+        <td style="width: 5%;">{{todo.done}}</td>
+        <td style="width: 5%;">
+
+          <button class="edit"
+                  (click)="gotoDetail(todo); $event.stopPropagation()">Edit</button>
+        </td>
+        <td style="width: 10%;">
+          <button class="delete"
+                  (click)="removeFromPerson(selectedPerson, todo); $event.stopPropagation()">Remove from person</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Todos that can be added</h2>
+  <div *ngIf="todos?.length < 1">
+    No addable todos found
+  </div>
+  <div *ngIf="todos?.length > 0">
+    <table class="table" role="grid" style="width: 50%; text-align: left;">
+      <thead>
+      <tr role="row">
+        <th>ID</th>
+        <th>Short description</th>
+        <th>Long description</th>
+        <th>Done</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let todo of todos" [class.selected]="todo === selectedTodo" (click)="onSelectTodo(todo)">
+        <td style="width: 2%;">{{todo.id}}</td>
+        <td style="width: 10%;">{{todo.shortdesc}}</td>
+        <td style="width: 10%;">{{todo.longdesc}}</td>
+        <td style="width: 5%;">{{todo.done}}</td>
+        <td style="width: 5%;">
+          <button class="add"
+                  (click)="gotoDetail(todo); $event.stopPropagation()">Add to {{selectedPerson.name}}</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

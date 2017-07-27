@@ -6,10 +6,12 @@ import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { UserDetailComponent } from './user-detail.component';
-import { UsersComponent } from './users.component';
-import { UserSearchComponent } from './user-search.component';
-import { UserService } from './user.service';
+import { PersonDetailComponent } from './person/person-detail.component';
+import { PersonsComponent } from './person/persons.component';
+import { PersonService } from './person/person.service';
+import { TodoDetailComponent } from './todo/todo-detail.component';
+import { TodosComponent } from './todo/todos.component';
+import { TodoService } from './todo/todo.service';
 
 
 @NgModule({
@@ -21,11 +23,15 @@ import { UserService } from './user.service';
   ],
   declarations: [
     AppComponent,
-    UserDetailComponent,
-    UsersComponent,
-    UserSearchComponent
+    PersonDetailComponent,
+    PersonsComponent,
+    TodoDetailComponent,
+    TodosComponent
   ],
-  providers: [ UserService ],
+  providers: [
+    PersonService,
+    TodoService
+  ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
