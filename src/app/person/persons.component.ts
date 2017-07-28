@@ -47,6 +47,14 @@ export class PersonsComponent implements OnInit {
       .then();
   }
 
+  save(person: Person, todo: Todo): void {
+    person.todos.push(
+      todo
+    )
+    this.personService.update(person)
+      .then();
+  }
+
   getUniqueTodos(p: Person): void {
     this.todoService.getTodos()
       .subscribe(
@@ -61,36 +69,7 @@ export class PersonsComponent implements OnInit {
           this.todos = data;
       }
     );
-    /*
-    for (let i = 0, len = p.todos.length; i < len; i++) {
-      this.test.filter(function(value, index, array){
-        if(this.test[i].id === value.id) {
-          array.splice(index, 1);
-        }
-      });
-    }*/
   }
-/*
-  getUniqueTodos(p: Person): void {
-    this.todoService.getTodos().then(function(data){
-      console.log(data);
-      for(var propertyName in data) {
-
-        console.log(data[propertyName])
-        for(var boop in data[propertyName]) {
-          console.log(boop);
-        }
-      }
-      /*
-       for (let i = 0, len = p.todos.length; i < len; i++) {
-       this.todos.filter(function(value, index, array){
-       if (p.todos[i].id === value.id) {
-       array.splice(index, 1);
-       }
-       });
-       }
-    })
-  }*/
 
   add(form: NgForm): void {
     const name = form.value.name.trim();

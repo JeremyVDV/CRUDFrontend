@@ -82,7 +82,7 @@
         <td style="width: 5%;">{{todo.done}}</td>
         <td style="width: 5%;">
           <button class="add"
-                  (click)="gotoDetail(todo); $event.stopPropagation()">Add to {{selectedPerson.name}}</button>
+                  (click)="save(selectedPerson, todo); $event.stopPropagation()">Add to {{selectedPerson.name}}</button>
         </td>
       </tr>
       </tbody>
